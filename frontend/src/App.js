@@ -1,11 +1,11 @@
-import * as React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Home from './views/home';
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>Robot Market</h1>
-      {/*Add your code here*/}
-    </div>
+   <Home/>
   );
 }
 
