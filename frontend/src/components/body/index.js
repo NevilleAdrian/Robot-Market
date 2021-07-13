@@ -3,17 +3,11 @@ import "./index.css"
 import axios from 'axios'
 import { useEffect, useState } from 'react';
 import NavBar from '../navbar';
-import { useSelector } from 'react-redux'
-import { formattedCurrency } from '../../utils';
 import dateFormat from 'dateformat';
 import { Alert } from 'reactstrap';
 import SweetAlert from 'react-bootstrap-sweetalert';
 
 export default function Body() {
-
-    //Get Currency from Redux Store
-    const curr = useSelector(state => state.currency);
-
 
 
     //Retrieve products from Robot api
@@ -22,27 +16,31 @@ export default function Body() {
             .then(products => {
                 setProducts(products.data.data)
                 setFilteredProduct(products.data.data)
-            }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
 
 
     //Hooks for products
     const [products, setProducts] = useState([])
 
+
     //Hooks to filter products
     const [filteredProduct, setFilteredProduct] = useState([])
  
+
     //Call getProducts on initstate
     useEffect(() => {
-        getProducts(curr)
-    }, [curr])
+        getProducts()
+    }, [])
     console.log('data', products)
 
 
     //Initialize items in cart
     const [cartItems, setCartItems] = useState([])
 
+
     //Initialize a boolean to display Alert
     const [alert, setAlert] = useState(false)
+
 
     //Logic to increment count. display navbar and display alert if item count is greater that 5
     const changeShow = (item) => {
@@ -53,6 +51,7 @@ export default function Body() {
           setAlert(true)
         }
     }
+
 
     useEffect(() => {
         console.log('array', cartItems)
@@ -95,10 +94,12 @@ export default function Body() {
         }
     }
 
+
     //remove item from product
     const removeItem = (id) => {
         setCartItems(cartItems.filter(a => a.id !== id))
     }
+
 
     //Decrement individual Cart Item
     const decrement = (id) => {
@@ -115,6 +116,7 @@ export default function Body() {
         }
 
     }
+
 
     const [showNav, setShowNav] = useState(false)
 
@@ -137,6 +139,7 @@ export default function Body() {
         setAlert(false)
     }
 
+
     //filter by material type
      const handleSearch = (event) => {
       let value = event.target.value.toLowerCase()
@@ -148,7 +151,7 @@ export default function Body() {
       setFilteredProduct(result);
      }
 
-
+     
     return (
         <>
         {alert && <SweetAlert

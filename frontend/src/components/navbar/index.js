@@ -4,8 +4,6 @@ import Logo from "../../assets/images/logo-black.png"
 import Cart from "../../assets/images/cart.png"
 import Arrow from "../../assets/images/left-arrow.png"
 import X from "../../assets/images/x.png"
-import { Currency } from '../mockdata'
-import { myCurrency } from '../../store/actions/currency'
 import { useSelector, useDispatch } from 'react-redux'
 import { formattedCurrency } from '../../utils'
 
@@ -14,9 +12,9 @@ import { formattedCurrency } from '../../utils'
 
 export default function NavBar({ number = 0, items, increment, decrement, displayNav, showNav, remove }) {
 
-    const curr = useSelector(state => state.currency);
 
-    const dispatch = useDispatch();
+
+
 
     //Calculate total price
     const calculateItems = items.reduce((accumulator, current) => accumulator += current.count * current.price, 0)
@@ -73,14 +71,7 @@ export default function NavBar({ number = 0, items, increment, decrement, displa
                              </div>
 
                          </div>
-                         <div className="pt-3">
-                             <select value={curr} onChange={({ target: { value } }) => dispatch(myCurrency(value))} className="input-dropdown">
-                                 {Currency.map((cur) => (
-                                     <option key={cur} value={cur}>{cur}</option>
-                                 ))}
-
-                             </select>
-                         </div>
+            
                          <div className="pt-3">
                              {items.map((item) => (
                                  <div key={item.id} className="white-bg mb-4 container-fluid">
